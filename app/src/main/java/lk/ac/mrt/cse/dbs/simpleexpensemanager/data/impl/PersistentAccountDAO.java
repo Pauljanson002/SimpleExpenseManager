@@ -24,13 +24,10 @@ public class PersistentAccountDAO implements AccountDAO {
         List<String> accountNumbers = new ArrayList<>();
         String query = "select accountNo from account";
         Cursor cursor = database.rawQuery(query,null);
-        try{
-            if(cursor.moveToFirst()){
-                do{
-                    String accountNo = cursor.getString(cursor.getColumnIndex("accountno"));
-                    accountNumbers.add(accountNo);
-                }
-                while (cursor.moveToNext());
+        try {
+            while(cursor.moveToNext()){
+                String accountNo = cursor.getString(cursor.getColumnIndex("accountno"));
+                accountNumbers.add(accountNo);
             }
         }catch (Exception exception){
             exception.printStackTrace();
